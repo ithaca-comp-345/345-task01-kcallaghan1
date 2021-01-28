@@ -46,10 +46,10 @@ public class BankAccount {
             return false;
             
         }
-        else if (email.indexOf('.') == -1 || email.indexOf('.')== 0){
+        else if(email.endsWith("@") || email.endsWith(".")){
             return false;
-
         }
+
         else {
             return true;
         }
