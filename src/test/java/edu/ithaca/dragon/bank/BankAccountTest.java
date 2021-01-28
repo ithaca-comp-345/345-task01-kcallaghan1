@@ -30,6 +30,9 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("a@b"));
         assertFalse(BankAccount.isEmailValid("@b.com"));
         assertFalse(BankAccount.isEmailValid("a@"));
+
+        //Add a boundary case of whether '@' and '.' are right next to each other
+        //Add a boundary case if '.' is missing in a nonempty email string 
     }
 
     @Test
