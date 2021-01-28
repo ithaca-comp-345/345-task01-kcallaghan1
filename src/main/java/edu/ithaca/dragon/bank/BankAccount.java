@@ -1,5 +1,7 @@
 package edu.ithaca.dragon.bank;
 
+import javax.lang.model.util.ElementScanner14;
+
 public class BankAccount {
 
     private String email;
@@ -40,10 +42,13 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
-            String w = "";
+        if (email.indexOf('@') == -1 || email.indexOf('@')== 0){
             return false;
             
+        }
+        else if (email.indexOf('.') == -1 || email.indexOf('.')== 0){
+            return false;
+
         }
         else {
             return true;
