@@ -53,19 +53,59 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest(){
+        
+        // Normal use, OK
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
+
+        // Empty string test
         assertFalse( BankAccount.isEmailValid(""));
-        assertTrue(BankAccount.isEmailValid("a@b.org"));
+
+        // Different top-level domain test
+        assertTrue(BankAccount.isEmailValid("a@b.tv"));
+
+        // Missing top-level domain test
         assertFalse(BankAccount.isEmailValid("a@b"));
+
+        // Missing name test
         assertFalse(BankAccount.isEmailValid("@b.com"));
+
+        // Missing domain and top-level domain test
         assertFalse(BankAccount.isEmailValid("a@"));
 
-        //Add a boundary case of whether '@' and '.' are right next to each other
-        assertTrue(BankAccount.isEmailValid(".@example.com")); // This is OK.
-        assertFalse(BankAccount.isEmailValid("example@.com")); // This is NOT.
+        // Missing domain test
+        assertFalse(BankAccount.isEmailValid("a@.com"));
 
-        //Add a boundary case if '@' is missing in a nonempty email string 
+        // First character is special character test
+        assertFalse(BankAccount.isEmailValid(".@example.com"));
+
+        // '@' is missing from email test
         assertFalse(BankAccount.isEmailValid("ab.com"));
+
+        // Last character is special character test
+        assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
+
+        // Two special characters together
+        assertFalse(BankAccount.isEmailValid("abc..def@mail.com");
+
+        // Containing illegal character test
+        assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));
+
+        // Containing special character surrounded by letters
+        assertTrue(BankAccount.isEmailValid("abc-d@mail.com"));
+        assertTrue(BankAccount.isEmailValid("abc_def2@mail.com"));
+
+        // Too-short domain test
+        assertFalse(BankAccount.isEmailValid("abc.def@mail.c");
+
+        // Illegal character in domain
+        assertFalse(BankAccount.isEmailValid("abc.def@mail#archive.com");
+
+        // Too many '.' in domain
+        assertFalse(BankAccount.isEmailValid("abc.def@mail..com"));
+
+        // Domain with special character test
+        assertTrue(BankAccount.isEmailValid("abc.def@mail-archive.com"))l
+        
     }
 
     @Test
