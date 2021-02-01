@@ -43,7 +43,7 @@ class BankAccountTest {
 
         // Withdrawing balance down to 0, after throwing exception
         bankAccount.withdraw(100);
-        assertEquals(100, bankAccount.getBalance());
+        assertEquals(0, bankAccount.getBalance());
 
         // Amount > balance, should throw exception.
         assertThrows(InsufficientFundsException.class, () ->  bankAccount.withdraw(100));
