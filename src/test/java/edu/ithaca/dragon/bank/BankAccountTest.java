@@ -85,7 +85,7 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
 
         // Two special characters together
-        assertFalse(BankAccount.isEmailValid("abc..def@mail.com");
+        assertFalse(BankAccount.isEmailValid("abc..def@mail.com"));
 
         // Containing illegal character test
         assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));
@@ -95,16 +95,16 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid("abc_def2@mail.com"));
 
         // Too-short domain test
-        assertFalse(BankAccount.isEmailValid("abc.def@mail.c");
+        assertFalse(BankAccount.isEmailValid("abc.def@mail.c"));
 
         // Illegal character in domain
-        assertFalse(BankAccount.isEmailValid("abc.def@mail#archive.com");
+        assertFalse(BankAccount.isEmailValid("abc.def@mail#archive.com"));
 
         // Too many '.' in domain
         assertFalse(BankAccount.isEmailValid("abc.def@mail..com"));
 
         // Domain with special character test
-        assertTrue(BankAccount.isEmailValid("abc.def@mail-archive.com"))l
+        assertTrue(BankAccount.isEmailValid("abc.def@mail-archive.com"));
         
     }
 
@@ -116,6 +116,36 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance());
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+    }
+    
+    @Test
+    void isAmountValidTest() {
+
+        // Valid amount with no decimals
+        assertTrue(BankAccount.isAmountValid(100));
+
+        // Valid amount with 1 decimal
+        assertTrue(BankAccount.isAmountValid(100.1));
+
+        // Valid amount with 2 decimals
+        assertTrue(BankAccount.isAmountValid(100.01));
+
+        // Invalid amount with 3 decimals
+        assertFalse(BankAccount.isAmountValid(100.001));
+
+        // Invalid negative amount
+        assertFalse(BankAccount.isAmountValid(-100));
+
+        // Invalid 0 amount
+        assertFalse(BankAccount.isAmountValid(0));
+
+        // Valid decimal amount
+        assertTrue(BankAccount.isAmountValid(0.01));
+
+        // Additional middle tests
+        assertTrue(BankAccount.isAmountValid(1.1));
+        assertTrue(BankAccount.isAmountValid(2.03));
+        assertTrue(BankAccount.isAmountValid(4000.25));
     }
 
 }

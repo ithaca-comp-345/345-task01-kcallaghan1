@@ -30,7 +30,6 @@ public class BankAccount {
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
-     * If amount is less than 0, do nothing
      */
     public void withdraw (double amount) throws InsufficientFundsException{
         if(amount < 0){
@@ -69,7 +68,7 @@ public class BankAccount {
     }
 
     /**
-     * @return true if amount is positive and has two or fewer decimal places, otherwise false
+     * @return true if amount is positive (amount > 0) and has two or fewer decimal places, otherwise false
      */
     public static boolean isAmountValid(double amount){
         // TODO: implement function
