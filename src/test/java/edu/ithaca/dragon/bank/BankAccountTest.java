@@ -156,4 +156,46 @@ class BankAccountTest {
         assertTrue(BankAccount.isAmountValid(4000.25));
     }
 
+    @Test
+    void depositTest() {
+        BankAccount bankAccount = new BankAccount("a@b.com", 100);
+
+        bankAccount.deposit(100);
+
+        // Normal use test
+        assertEquals(200, bankAccount.getBalance());
+
+        // Exception test
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-100));
+
+        // The rest of the tests will be redundant if there is a working isAmountValid method.
+
+    }
+
+    @Test
+    void transferTest() {
+        BankAccount bankAccount = new BankAccount("a@b.com", 100);
+        BankAccount bankAccount2 = new BankAccount("b@a.com", 200);
+
+        bankAccount.transfer(bankAccount2, 50);
+
+        // Normal use case
+        assertEquals(50, bankAccount.getBalance());
+        assertEquals(250, bankAccount2.getBalance());
+
+        // With invalid amount
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, -100));
+
+        // With insufficient funds
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.transfer(bankAccount2, 100));
+
+        // Empty an account
+        bankAccount2.transfer(bankAccount, 250);
+
+        assertEquals(300, bankAccount.getBalance());
+        assertEquals(0, bankAccount2.getBalance());
+
+        // The remaining cases should be covered by the isAmountValid method.
+    }
+
 }
