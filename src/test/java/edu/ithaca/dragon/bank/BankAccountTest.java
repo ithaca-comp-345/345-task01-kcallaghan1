@@ -169,7 +169,12 @@ class BankAccountTest {
         BankAccount bankAccount = new BankAccount("a@b.com", 100);
         BankAccount bankAccount2 = new BankAccount("b@a.com", 200);
 
+        try{
         bankAccount.transfer(bankAccount2, 50);
+        }
+        catch(Exception e){
+
+        }
 
         // Normal use case
         assertEquals(50, bankAccount.getBalance());
@@ -178,11 +183,22 @@ class BankAccountTest {
         // With invalid amount
         assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, -100));
 
+        // Amounts should have remained the same
+        assertEquals(50, bankAccount.getBalance());
+        assertEquals(250, bankAccount2.getBalance());
+
         // With insufficient funds
         assertThrows(InsufficientFundsException.class, () -> bankAccount.transfer(bankAccount2, 100));
 
+        // Amounts stay the same
+        assertEquals(50, bankAccount.getBalance());
+        assertEquals(250, bankAccount2.getBalance());
+
         // Empty an account
+        try{
         bankAccount2.transfer(bankAccount, 250);
+        }
+        catch(Exception e){}
 
         assertEquals(300, bankAccount.getBalance());
         assertEquals(0, bankAccount2.getBalance());
