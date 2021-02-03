@@ -15,14 +15,6 @@ class BankAccountTest {
         // Different amount
         bankAccount = new BankAccount("a@b.com", 100);
         assertEquals(100, bankAccount.getBalance());
-
-        // Zero amount
-        bankAccount = new BankAccount("a@b.com", 0);
-        assertEquals(0, bankAccount.getBalance());
-
-        // Negative amount
-        bankAccount = new BankAccount("a@b.com", -100);
-        assertEquals(-100, bankAccount.getBalance());
     }
 
     @Test
